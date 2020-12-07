@@ -20,7 +20,7 @@ class Example(TemplateView):
         #INSTRUCCIONES OPCIONALES 
         params = { 'order': 'desc' } 
         #AQUI VA LA URL O BIEN HAZ UNA VARIABLE Y PASALA AQUI 
-        response = generate_request('https://breaking-bad-quotes.herokuapp.com/v1/quotes', params)
+        response = generate_request('http://cesunrecursoshumanos.pythonanywhere.com/Cesun-universidad/DocenteAPI', params)
         # SE CONVIERTEN LOS DATOS A json, HAY MAS FORMAS DE HACERLO 
         data_string = json.dumps(response)
         decoded = json.loads(data_string)
@@ -28,8 +28,7 @@ class Example(TemplateView):
         #LOS RETONAMOS EN LAS VARIABLES 'NOTICIA' Y 'AUTOR' 
         return self.render_to_response(
             self.get_context_data(
-            noticia = decoded[0]['quote'],
-            autor = decoded[0]['author']
+            cesun_api = decoded
         ))
 
 # NO QUEDO CLARO ?
