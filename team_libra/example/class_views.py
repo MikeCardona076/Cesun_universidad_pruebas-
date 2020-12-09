@@ -33,3 +33,20 @@ class Example(TemplateView):
 
 # NO QUEDO CLARO ?
 # IR A https://requests.readthedocs.io/es/latest/
+
+# LA VISTA DE MATERIAS Y EL CONSUMO DE LA API PARA MOSTRAR LA INFORMACION
+class Materias(TemplateView):
+    template_name = "materias.html"
+
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        params = {'order': 'desc'}
+        response = generate_request('http://cesunrecursoshumanos.pythonanywhere.com/Cesun-universidad/DocenteAPI', params)
+        data_string = json.dumps(response)
+        decoded = json.loads(data_string)
+
+        return self.render_to_response(
+            self.get_context_data(
+                cesun_api = decoded
+            )
+        )
