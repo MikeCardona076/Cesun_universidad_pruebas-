@@ -1,3 +1,5 @@
+from example import class_views
+
 """team_libra URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -19,4 +21,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('example.urls')),
+    path('materias/', class_views.Materias.as_view(), name='Materias'),
 ]
