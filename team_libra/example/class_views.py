@@ -2,6 +2,8 @@ from django.views.generic import ListView, TemplateView
 import requests
 import json
 
+base_URL = 'http://cesunrecursoshumanos.pythonanywhere.com/Cesun-universidad/'
+
 #FUNCION EXTRA, EN REALIDAD ES OPCIONAL 
 def generate_request(url, params={}):
     response = requests.get(url, params=params)
@@ -20,7 +22,7 @@ class Example(TemplateView):
         #INSTRUCCIONES OPCIONALES 
         params = { 'order': 'desc' } 
         #AQUI VA LA URL O BIEN HAZ UNA VARIABLE Y PASALA AQUI 
-        response = generate_request('http://cesunrecursoshumanos.pythonanywhere.com/Cesun-universidad/DocenteAPI', params)
+        response = generate_request(base_URL + 'DocenteAPI', params)
         # SE CONVIERTEN LOS DATOS A json, HAY MAS FORMAS DE HACERLO 
         data_string = json.dumps(response)
         decoded = json.loads(data_string)
@@ -48,3 +50,20 @@ class Crear_usuario(TemplateView):
 
 # NO QUEDO CLARO ?
 # IR A https://requests.readthedocs.io/es/latest/
+
+# LA VISTA DE MATERIAS Y EL CONSUMO DE LA API PARA MOSTRAR LA INFORMACION
+class Materias(TemplateView):
+    template_name = "materias.html"
+
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        params = {'order': 'desc'}
+        response = generate_request(base_URL + 'DocenteAPI', params)
+        data_string = json.dumps(response)
+        decoded = json.loads(data_string)
+
+        return self.render_to_response(
+            self.get_context_data(
+                cesun_api = decoded
+            )
+        )
