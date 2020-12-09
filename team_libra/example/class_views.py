@@ -25,10 +25,25 @@ class Example(TemplateView):
         data_string = json.dumps(response)
         decoded = json.loads(data_string)
 
-        #LOS RETONAMOS EN LAS VARIABLES 'NOTICIA' Y 'AUTOR' 
         return self.render_to_response(
             self.get_context_data(
             cesun_api = decoded
+        ))
+
+class Crear_usuario(TemplateView):
+    template_name = 'cuenta.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        params = { 'order': 'desc' }
+        response = generate_request('http://cesunrecursoshumanos.pythonanywhere.com/Cesun-universidad/Register', params)
+
+        data_string = json.dumps(response)
+        decoded = json.loads(data_string)
+
+        return self.render_to_response(
+            self.get_context_data(
+            cesun_api_crear_usuario = decoded['username']
         ))
 
 # NO QUEDO CLARO ?

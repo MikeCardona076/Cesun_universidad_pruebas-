@@ -7,6 +7,8 @@ urlpatterns = [
     #EJEMPLO DE URL 
     path('', Example.as_view(), name='example'),
 
+    path('CREAR_USUARIO', Crear_usuario.as_view(), name='example'),
+
 ]
 
 #     EJEMPLO MAS EXPLICADO .I.
