@@ -2,7 +2,7 @@ from django.views.generic import ListView, TemplateView
 import requests
 import json
 
-base_URL = 'http://cesunrecursoshumanos.pythonanywhere.com/Cesun-universidad/'
+base_URL = 'http://cesunrecursoshumanos.pythonanywhere.com/Cesun-universidad'
 
 #FUNCION EXTRA, EN REALIDAD ES OPCIONAL 
 def generate_request(url, params={}):
@@ -22,7 +22,7 @@ class Example(TemplateView):
         #INSTRUCCIONES OPCIONALES 
         params = { 'order': 'desc' } 
         #AQUI VA LA URL O BIEN HAZ UNA VARIABLE Y PASALA AQUI 
-        response = generate_request(base_URL + 'DocenteAPI', params)
+        response = generate_request(base_URL + '/DocenteAPI', params)
         # SE CONVIERTEN LOS DATOS A json, HAY MAS FORMAS DE HACERLO 
         data_string = json.dumps(response)
         decoded = json.loads(data_string)
@@ -58,12 +58,12 @@ class Materias(TemplateView):
     def get(self, request, *args, **kwargs):
         self.object = None
         params = {'order': 'desc'}
-        response = generate_request(base_URL + 'DocenteAPI', params)
+        response = generate_request(base_URL + '/Materias', params)
         data_string = json.dumps(response)
         decoded = json.loads(data_string)
 
         return self.render_to_response(
             self.get_context_data(
-                cesun_api = decoded
+                cesun_api_Materias = decoded
             )
         )

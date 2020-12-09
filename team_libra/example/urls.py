@@ -5,9 +5,11 @@ app_name  = 'example'
 
 urlpatterns = [
     #EJEMPLO DE URL 
-    path('', Example.as_view(), name='example'),
+    path('', Example.as_view(), name='Docente'),
 
-    path('CREAR_USUARIO', Crear_usuario.as_view(), name='example'),
+    path('CREAR_USUARIO/', Crear_usuario.as_view(), name='example'),
+
+    path('Materia/', Materias.as_view(), name='Materias'),
 
 ]
 

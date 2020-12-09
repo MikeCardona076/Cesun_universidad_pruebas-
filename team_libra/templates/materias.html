@@ -2,5 +2,23 @@
 
 {% block content %}
 
-
+<div class="container" style="padding-top:10px">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Materia</th>
+          <th scope="col">Carrera</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for docente in cesun_api_Materias %}
+        <tr>
+          <th scope="row">{{ docente.id_materia }}</th>
+          <td>{{ docente.nombre }}</td>
+          <td>{{ docente.carrera }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+</div>
 {% endblock content %}
